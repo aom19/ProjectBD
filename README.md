@@ -2,7 +2,7 @@
   ##Technologies Mongo DB, Express js  , GraphQL
   
   ## How to start the API
-    ### You have to install:
+    ###You have to install:
       node js   => "node -v - to check if you have it", "https://nodejs.org/en/" - can download from here 
       package manager "npm"  => "npm install npm@latest -g" 
     ### Clone/download the repository 
