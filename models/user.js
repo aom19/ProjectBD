@@ -13,9 +13,9 @@ const userSchema = new Schema({
   },
   //to knnow which user create which event(booking) || relations ( user - events(booking));
   createdEvents: [
-    //store a list//array of id;
-    //ref to event model
-    //describe one single element of this array;
+    //   //store a list//array of id;
+    //   //ref to event model
+    //   //describe one single element of this array;
     {
       type: Schema.Types.ObjectId,
       ref: "Event",

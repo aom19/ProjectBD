@@ -13,6 +13,8 @@ const app = express();
 
 app.use(bodyParser.json());
 
+
+
 //one single endpoint /graphql ;  no get, post , put etc
 // query for fetching data
 //mutation for create, editing data
@@ -34,16 +36,18 @@ app.use(
             description :String!
             price:Float!
             date:String!  
+            creator : User!
+
         }
 
         type User{
             _id : ID!
             email:String!
             password :String
-            
+            createdEvents : [Event!]
         }
         
-        input EventInput{
+         input EventInput{
             title :String!
             description :String!
             price:Float!
@@ -73,16 +77,30 @@ app.use(
     rootValue: {
       events: () => {
         //async function
-        return Event.find()
-          .then((events) => {
-            return events.map((event) => {
-              //to recieve just information we need , without metadataa , will distructuring this objects
-              return { ...event._doc };
-            });
-          })
-          .catch((err) => {
-            throw err;
-          });
+        //populaate give us extradata like email/ password  of creator
+        return (
+          Event.find()
+            //populate give all extra data , find specific creator id
+            .populate("creator")
+
+            .then((events) => {
+              console.log(events);
+              return events.map((event) => {
+                //to recieve just information we need , without metadataa , will distructuring this objects
+                return {
+                  ...event._doc,
+                  _id: event.id,
+                  creator: {
+                    ...event._doc.creator._doc,
+                    _id: event._doc.creator.id,
+                  },
+                };
+              });
+            })
+            .catch((err) => {
+              throw err;
+            })
+        );
       },
       createEvent: (args) => {
         const event = new Event({
@@ -91,7 +109,7 @@ app.use(
           price: +args.eventInput.price,
           date: new Date(args.eventInput.date),
           //pass the ObjectId  of  the creator(user)
-          creator: "6048d6956d0d3613f59fedea",
+          creator: "6048d60d774bdf4eee42deb4",
         });
         let createdEvent;
         //store in DATABAASE
@@ -102,7 +120,7 @@ app.use(
             //to recieve just information we need , without metadataa , will distructuring this objects
             //In mongo db , "id" it's a special type  to have access to it need to convert/destructuring
             createdEvent = { ...result._doc, password: null, _id: result.id };
-            console.log(result);
+            // console.log(result);
 
             return User.findById("6048d60d774bdf4eee42deb4");
           })
@@ -119,6 +137,7 @@ app.use(
           .catch((err) => {
             throw err;
           });
+        console.log(User);
       },
       createUser: (args) => {
         // to not store 2 user with same email;
