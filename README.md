@@ -4,8 +4,8 @@
 
 ## Getting Started
 
-npm install to install all the dependencies
-npm run to start the app
+    ### ssnpm install to install all the dependencies
+    ###  run to start the app
 
 Go to http://localhost:3000/graphql
 
@@ -68,7 +68,7 @@ Give an example
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
 
 ## Acknowledgments
 
