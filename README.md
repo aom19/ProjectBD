@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-    ### ssnpm install to install all the dependencies
+    ###  npm install to install all the dependencies
     ###  run to start the app
 
 Go to http://localhost:3000/graphql
