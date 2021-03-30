@@ -18,7 +18,7 @@ const user = async (userId) => {
     return {
       ...user._doc,
       _id: user.id,
-      createdEvents: () => eventLoader.loadMany(user._doc.createdEvents)
+      createdEvents: () => eventLoader.loadMany(user._doc.createdEvents),
     };
   } catch (err) {
     throw err;
@@ -38,6 +38,12 @@ const singleEvent = async (eventId) => {
 const events = async (eventIds) => {
   try {
     const events = await Event.find({ _id: { $in: eventIds } });
+    events.sort((a, b) => {
+      return (
+        //to fetch events on order based on eventIds
+        eventIds.indexOf(a._id.toString()) - eventIds.indexOf(b._id.toString())
+      );
+    });
     return events.map((event) => {
       return transformEvent(event);
     });
