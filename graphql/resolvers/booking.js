@@ -1,6 +1,7 @@
 const { dateToString } = require("../../helpers/date");
 const Event = require("../../models/event");
 const Booking = require("../../models/booking");
+
 const { transformBooking, transformEvent } = require("./merge");
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
       throw new Error("Unathenticathed");
     }
     try {
-      const bookings = await Booking.find();
+      const bookings = await Booking.find({ user: req.userId  });
       return bookings.map((booking) => {
         return transformBooking(booking);
       });

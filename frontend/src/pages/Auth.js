@@ -70,7 +70,13 @@ const AuthPage = () => {
       })
       .then((resData) => {
         if (resData.data.login.token) {
-          context.login(resData.data.login.token, resData.data.login.userId , resData.data.login.tokenExpiration);
+          context.login(
+            resData.data.login.token,
+            resData.data.login.userId,
+            resData.data.login.tokenExpiration
+          );
+          // context.token = resData.data.login.token;
+          // context.userId = resData.data.login.userId;
         }
       })
       .catch((err) => {

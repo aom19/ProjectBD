@@ -13,7 +13,7 @@ type Event {
     _id : ID!
     title :String!
     description :String!
-    price:Float!
+    price:String!
     date:String!  
     creator : User!
 
@@ -34,7 +34,7 @@ type AuthData{
  input EventInput{
     title :String!
     description :String!
-    price:Float!
+    price:String!
     date:String! 
 }
 input UserInput{

@@ -29,7 +29,7 @@ function App() {
         <AuthContext.Provider
           value={{
             token: values.token,
-            userId: values.token,
+            userId: values.userId,
             login: login,
             logout: logout,
           }}
@@ -37,7 +37,6 @@ function App() {
           <MainNavigation />
           <main className="main-content">
             <Switch>
-              {!values.token && <Redirect from="/" to="/auth" exact />}
               {values.token && <Redirect from="/" to="/events" exact />}
               {values.token && <Redirect from="/auth" to="/events" exact />}
 
@@ -45,6 +44,7 @@ function App() {
                 <Route path="/auth" component={AuthPage} exact />
               )}
               <Route path="/events" component={EventPage} exact />
+              {!values.token && <Redirect to="/auth" exact />}
               {values.token && (
                 <Route path="/bookings" component={BookingPage} exact />
               )}
