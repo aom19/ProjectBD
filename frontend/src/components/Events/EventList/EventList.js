@@ -9,7 +9,9 @@ const eventList = (props) => {
       <EventItem
         key={event._id}
         eventId={event._id}
-        title={event.title}
+        marca={event.marca}
+        clasa={event.clasa}
+        numarKilometri ={event.numarKilometri}
         price={event.price}
         date={event.date}
         creatorId={event.creator._id}

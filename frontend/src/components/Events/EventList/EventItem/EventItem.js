@@ -4,9 +4,13 @@ import "./EventItem.css";
 const eventItem = (props) => (
   <li key={props.eventId} className="events__list-item">
     <div>
-      <h1>{props.title}</h1>
+      <h1>{props.marca}</h1>
+      <h2>Clasa : {props.clasa}</h2>
+      <h2>Numar Kilometri : {props.numarKilometri} km</h2>
+
       <h2>
-        ${props.price} -{new Date(props.date).toDateString()}
+        {/* Price/hour: ${props.price} - {new Date(props.date).toDateString()} */}
+        Price/hour: ${props.price}
       </h2>
     </div>
     {/* {console.log(props.userId)} */}

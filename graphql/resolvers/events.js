@@ -27,7 +27,12 @@ module.exports = {
     }
 
     const event = new Event({
-      title: args.eventInput.title,
+      numarInmatriculare: args.eventInput.numarInmatriculare,
+      numarKilometri: args.eventInput.numarKilometri,
+      marca: args.eventInput.marca,
+      detaliiMarca: args.eventInput.detaliiMarca,
+      clasa: args.eventInput.clasa,
+      urlImage: args.eventInput.urlImage,
       description: args.eventInput.description,
       price: +args.eventInput.price,
       date: new Date(args.eventInput.date),

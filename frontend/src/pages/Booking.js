@@ -25,9 +25,16 @@ const BookingPage = () => {
           _id
           createdAt
           event{
-            _id
-            title
-            date
+              _id
+              date,
+              description,
+              numarInmatriculare,
+              numarKilometri,
+              marca,
+              detaliiMarca,
+              clasa,
+              price,
+              urlImage,
           }
         }
       }
@@ -68,7 +75,7 @@ const BookingPage = () => {
       mutation CancelBooking($id : ID!) { 
         cancelBooking(bookingId :$id){
           _id
-            title
+          numarInmatriculare
         }
       }
     `,

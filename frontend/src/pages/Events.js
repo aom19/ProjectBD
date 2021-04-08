@@ -14,9 +14,14 @@ const EventPage = () => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState({
-    title: "",
-    price: "",
+    numarInmatriculare: "",
+    numarKilometri: "",
     date: "",
+    marca: "",
+    detaliiMarca: "",
+    clasa: "",
+    price: "",
+    urlImage: "",
     description: "",
   });
   const context = useContext(AuthContext);
@@ -35,31 +40,64 @@ const EventPage = () => {
 
   const modalConfirmHandler = () => {
     setCreating(false);
-    const title = values.title;
-    //const price = parseFloat(values.price); // to convert in number
-    const price = +values.price; // to convert in number
+    // const title = values.title;
+    // //const price = parseFloat(values.price); // to convert in number
+    // const price = +values.price; // to convert in number
+    const numarInmatriculare = values.numarInmatriculare;
+    const numarKilometri = values.numarKilometri;
     const date = values.date;
+    const marca = values.marca;
+    const detaliiMarca = values.detaliiMarca;
+    const clasa = values.clasa;
+    const price = values.price;
+    const urlImage = values.urlImage;
     const description = values.description;
 
-    if (
-      title.trim().length === 0 ||
-      price < 0 ||
-      date.trim().length === 0 ||
-      description.trim().length === 0
-    ) {
-      return;
-    }
+    // if (
+    //   title.trim().length === 0 ||
+    //   price < 0 ||
+    //   date.trim().length === 0 ||
+    //   description.trim().length === 0
+    // ) {
+    //   return;
+    // }
     // const event = { title : title, price: price, date: date, description };
-    const event = { title, price, date, description };
+    const event = {
+      date,
+      description,
+      numarInmatriculare,
+      numarKilometri,
+      marca,
+      detaliiMarca,
+      clasa,
+      price,
+      urlImage,
+    };
     const requestBody = {
       query: `
         mutation { 
-          createEvent(eventInput: {title:"${title}" , description:"${description}" , price:"${price}", date:"${date}"}){
+          createEvent(eventInput: {
+            numarInmatriculare:"${numarInmatriculare}" ,
+            numarKilometri:"${numarKilometri}" ,
+            marca:"${marca}", 
+            detaliiMarca:"${detaliiMarca}", 
+            clasa:"${clasa}", 
+            price:"${price}", 
+            urlImage:"${urlImage}", 
+            date:"${date}"
+            description:"${description}"
+            })
+          {
             _id
-            title
-            price
-            description
-            date
+            date,
+            description,
+            numarInmatriculare,
+            numarKilometri,
+            marca,
+            detaliiMarca,
+            clasa,
+            price,
+            urlImage,
             creator{
               _id
               email
@@ -108,10 +146,15 @@ const EventPage = () => {
       query { 
         events{
           _id
-          title
-          price
-          description
-          date
+          date,
+          description,
+          numarInmatriculare,
+          numarKilometri,
+          marca,
+          detaliiMarca,
+          clasa,
+          price,
+          urlImage,
           creator{
             _id
             email
@@ -200,7 +243,7 @@ const EventPage = () => {
       {creating && (
         <Modal
           buttonTitle="Confirm"
-          title="Add Event"
+          title="Add Car"
           canCancel
           canConfirm
           onCancel={modalCancelHandler}
@@ -208,17 +251,68 @@ const EventPage = () => {
         >
           <form>
             <div className="form-control">
-              <label htmlFor="title">Tatle</label>
+              <label htmlFor="numarInmatriculare">Numar Inmatriculare</label>
               <input
                 type="text"
-                id="title"
-                name="title"
-                value={values.title}
+                id="numarInmatriculare"
+                name="numarInmatriculare"
+                value={values.numarInmatriculare}
                 onChange={handleChange}
               />
             </div>
             <div className="form-control">
-              <label htmlFor="price">Price</label>
+              <label htmlFor="numarKilometri">Numar kilometri</label>
+              <input
+                type="number"
+                id="numarKilometri"
+                name="numarKilometri"
+                value={values.numarKilometri}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-control">
+              <label htmlFor="date">Data Fabricatie</label>
+              <input
+                type="datetime-local"
+                id="date"
+                name="date"
+                value={values.date}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-control">
+              <label htmlFor="marca">Marca</label>
+              <input
+                type="text"
+                id="marca"
+                name="marca"
+                value={values.marca}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-control">
+              <label htmlFor="detaliiMarca">Detalii Marca</label>
+              <input
+                type="text"
+                id="detaliiMarca"
+                name="detaliiMarca"
+                value={values.detaliiMarca}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-control">
+              <label htmlFor="clasa">Clasa</label>
+              <input
+                type="text"
+                id="clasa"
+                name="clasa"
+                value={values.clasa}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-control">
+              <label htmlFor="price">Pret/ora</label>
               <input
                 type="number"
                 id="price"
@@ -228,15 +322,16 @@ const EventPage = () => {
               />
             </div>
             <div className="form-control">
-              <label htmlFor="date">Date</label>
+              <label htmlFor="urlImage">Url-Image</label>
               <input
-                type="datetime-local"
-                id="date"
-                name="date"
-                value={values.date}
+                type="text"
+                id="urlImage"
+                name="urlImage"
+                value={values.urlImage}
                 onChange={handleChange}
               />
             </div>
+
             <div className="form-control">
               <label htmlFor="description">Description</label>
               <textarea
@@ -254,25 +349,39 @@ const EventPage = () => {
       {selectedEvent && (
         <Modal
           buttonTitle={context.token ? "Book" : "Confirm"}
-          title={selectedEvent.title}
+          title={selectedEvent.marca}
           canCancel
           canConfirm
           onCancel={modalCancelHandler}
           onConfirm={bookEventHandler}
         >
-          <h1>{selectedEvent.title}</h1>
+          {/* <h1>{selectedEvent.clasa}</h1>
+          <h2>${selectedEvent.price}</h2>
+          <h2>{new Date(selectedEvent.date).toDateString()}</h2>
+          <p>{selectedEvent.description}</p> */}
+
+          <h1>{selectedEvent.marca}</h1>
+          <h2>Clasa : {selectedEvent.clasa}</h2>
+          <h2>Numar Inmatriculare : {selectedEvent.numarInmatriculare}</h2>
+          <h2>Detalii Marca : {selectedEvent.detaliiMarca}</h2>
+
+          <h2>Numar Kilometri : {selectedEvent.numarKilometri} km</h2>
           <h2>
-            ${selectedEvent.price} -{" "}
-            {new Date(selectedEvent.date).toDateString()}
+            Data fabricatie:
+            <i>{new Date(selectedEvent.date).toDateString()}</i>{" "}
           </h2>
-          <p>{selectedEvent.description}</p>
+          <h2>
+            {/* Price/hour: ${props.price} - {new Date(props.date).toDateString()} */}
+            Price/hour: ${selectedEvent.price} /h
+          </h2>
+          <h2>description : {selectedEvent.description}</h2>
         </Modal>
       )}
       {context.token && (
         <div className="events-controls">
           <p>Share new cars!!</p>
           <button className="btn" onClick={createHandler}>
-            Create Event
+            Add a new car
           </button>
         </div>
       )}

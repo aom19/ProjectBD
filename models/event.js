@@ -4,10 +4,31 @@ const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
   //Js Object
-  title: {
+  numarInmatriculare: {
     type: String,
     required: true,
   },
+  numarKilometri: {
+    type: Number,
+    required: true,
+  },
+  marca: {
+    type: String,
+    required: true,
+  },
+  detaliiMarca: {
+    type: String,
+    required: true,
+  },
+  clasa: {
+    type: String,
+    required: true,
+  },
+  urlImage: {
+    type: String,
+    required: true,
+  },
+
   description: {
     type: String,
     required: true,

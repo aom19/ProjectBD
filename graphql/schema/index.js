@@ -11,10 +11,15 @@ type Booking{
 
 type Event {
     _id : ID!
-    title :String!
-    description :String!
-    price:String!
-    date:String!  
+    numarInmatriculare: String!
+    numarKilometri: String!
+    date: String!
+    marca: String!
+    detaliiMarca: String!
+    clasa:String!
+    price: String!
+    urlImage: String!
+    description: String!
     creator : User!
 
 }
@@ -32,10 +37,15 @@ type AuthData{
 }
 
  input EventInput{
-    title :String!
-    description :String!
-    price:String!
-    date:String! 
+    numarInmatriculare: String!
+    numarKilometri: String!
+    date: String!
+    marca: String!
+    detaliiMarca: String!
+    clasa:String!
+    price: String!
+    urlImage: String!
+    description: String!
 }
 input UserInput{
     email:String!
