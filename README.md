@@ -63,8 +63,8 @@ Give an example
 ## Authors
 
 - **Ostopovici Anton** - _Initial work_ - [aom19](https://github.com/aom19)
-- **Lazar Catalin** - _Initial work_ - []()
-- **Simion Marina** - _Initial work_ - []()
+- **Simion Marina** - _Initial work_ - [marina](https://github.com/SimionMarina)
+- **Lazar Catalin** - _Initial work_ - [Catalin](https://github.com/Berlici)
 
 ## License
 
