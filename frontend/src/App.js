@@ -14,13 +14,14 @@ function App() {
   const [values, setValues] = useState({
     token: null,
     userId: null,
+    isAdmin: null,
   });
   console.log(values);
-  const login = (token, userId, tokenExpiration) => {
-    setValues({ token: token, userId: userId });
+  const login = (token, userId, tokenExpiration, isAdmin) => {
+    setValues({ token: token, userId: userId, isAdmin: isAdmin });
   };
   const logout = () => {
-    setValues({ token: null, userId: null });
+    setValues({ token: null, userId: null, isAdmin: null });
   };
 
   return (
@@ -30,6 +31,7 @@ function App() {
           value={{
             token: values.token,
             userId: values.userId,
+            isAdmin: values.isAdmin,
             login: login,
             logout: logout,
           }}

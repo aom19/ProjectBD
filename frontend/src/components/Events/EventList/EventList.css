@@ -1,7 +1,15 @@
 .event__list {
-  margin: 2rem auto;
-  width: 40rem;
+  position: relative;
+  margin: 5rem 2rem 2rem 2rem;
+  padding-bottom: 1rem;
+  width: 20rem;
   max-width: 90%;
   list-style: none;
-  padding: 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+
+.event__item {
+}
+

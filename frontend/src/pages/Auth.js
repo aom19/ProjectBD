@@ -1,9 +1,11 @@
 import React, { Component, useState, useContext } from "react";
-import "./Auth.css";
+import "./Auth.scss";
 import AuthContext from "../context/auth-context";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [isError, setIsError] = useState(false);
+
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -14,6 +16,7 @@ const AuthPage = () => {
   const handleModeChange = () => {
     setIsLogin(!isLogin);
   };
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,9 +31,9 @@ const AuthPage = () => {
     const email = values.email;
     const password = values.password;
 
-    if (email.trim().length === 0 || password.trim().length === 0) {
-      return;
-    }
+    // if (email.trim().length === 0 || password.trim().length === 0) {
+    //   setIsError(true);
+    // }
     let requestBody = {
       query: `
         query{
@@ -38,6 +41,8 @@ const AuthPage = () => {
             userId 
             token
             tokenExpiration
+           isAdmin
+            
           }
         }
       `,
@@ -70,6 +75,7 @@ const AuthPage = () => {
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed");
+          setIsError(true);
         }
         return res.json();
       })
@@ -78,7 +84,8 @@ const AuthPage = () => {
           context.login(
             resData.data.login.token,
             resData.data.login.userId,
-            resData.data.login.tokenExpiration
+            resData.data.login.tokenExpiration,
+            resData.data.login.isAdmin
           );
           // context.token = resData.data.login.token;
           // context.userId = resData.data.login.userId;
@@ -86,37 +93,54 @@ const AuthPage = () => {
       })
       .catch((err) => {
         console.log(err);
+        setIsError(true);
       });
   };
   return (
-    <form className="auth-form" onSubmit={handleSubmit}>
-      <div className="form-control">
-        <label htmlFor="email"> Email </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={values.email}
-          onChange={handleChange}
-        />
+    <div className="container">
+      {/* {isError ? (
+        <div class="alert alert-primary" role="alert">
+          This is a primary alert—check it out!
+        </div>
+      ) : ( */}
+      <div className="log-form">
+        <form className="col-md-6 offset-md-3" onSubmit={handleSubmit}>
+          <h2>{isLogin ? "Please  Sign In" : "Please Sign Up"}</h2>
+          <hr className="divisor" />
+          <div className="form-control">
+            {/* <label htmlFor="email"> Email </label> */}
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="email"
+              value={values.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-control">
+            {/* <label htmlFor="password"> Password </label> */}
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="password"
+              value={values.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-actions">
+            <button type="button" className="btn" onClick={handleModeChange}>
+              Switch to {isLogin ? "Signup" : "Login"}
+            </button>
+            <button type="submit" className="btn">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
-      <div className="form-control">
-        <label htmlFor="password"> Password </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={values.password}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-actions">
-        <button type="button" onClick={handleModeChange}>
-          Switch to {isLogin ? "Signup" : "Login"}
-        </button>
-        <button type="submit"> Submit</button>
-      </div>
-    </form>
+      {/* )} */}
+    </div>
   );
 };
 

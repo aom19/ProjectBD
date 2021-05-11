@@ -3,7 +3,7 @@ import Modal from "../components/Modal/Modal";
 import Backdrop from "../components/Backdrop/Backdrop";
 import AuthContext from "../context/auth-context";
 import "./Events.css";
-
+import "../components/Events/EventList/EventItem/EventItem.css";
 import EventList from "../components/Events/EventList/EventList";
 import Spinner from "../components/Spiner/Spinner";
 
@@ -237,6 +237,10 @@ const EventPage = () => {
         setIsLoading(false);
       });
   };
+  const deleteHandler =(eventId) =>{
+    console.log(eventId)
+  }
+
   return (
     <React.Fragment>
       {(creating || selectedEvent) && <Backdrop />}
@@ -359,31 +363,37 @@ const EventPage = () => {
           <h2>${selectedEvent.price}</h2>
           <h2>{new Date(selectedEvent.date).toDateString()}</h2>
           <p>{selectedEvent.description}</p> */}
+          <div>
+            <h1>Marca :{selectedEvent.marca}</h1>
 
-          <h1>{selectedEvent.marca}</h1>
-          <h2>Clasa : {selectedEvent.clasa}</h2>
-          <h2>Numar Inmatriculare : {selectedEvent.numarInmatriculare}</h2>
-          <h2>Detalii Marca : {selectedEvent.detaliiMarca}</h2>
+            <h2>Clasa : {selectedEvent.clasa}</h2>
 
-          <h2>Numar Kilometri : {selectedEvent.numarKilometri} km</h2>
-          <h2>
-            Data fabricatie:
-            <i>{new Date(selectedEvent.date).toDateString()}</i>{" "}
-          </h2>
-          <h2>
-            {/* Price/hour: ${props.price} - {new Date(props.date).toDateString()} */}
-            Price/hour: ${selectedEvent.price} /h
-          </h2>
-          <h2>description : {selectedEvent.description}</h2>
+            <h2>Numar Inmatriculare : {selectedEvent.numarInmatriculare}</h2>
+            <h2>Detalii Marca : {selectedEvent.detaliiMarca}</h2>
+
+            <h2>Numar Kilometri : {selectedEvent.numarKilometri} km</h2>
+            <h2>
+              Data fabricatie:
+              <i>{new Date(selectedEvent.date).toDateString()}</i>{" "}
+            </h2>
+            <h2>
+              {/* Price/hour: ${props.price} - {new Date(props.date).toDateString()} */}
+              Price/hour: ${selectedEvent.price} /h
+            </h2>
+            <h2>description : {selectedEvent.description}</h2>
+          </div>
         </Modal>
       )}
-      {context.token && (
+
+      {context.isAdmin === "true"  && context.token ? (
         <div className="events-controls">
           <p>Share new cars!!</p>
           <button className="btn" onClick={createHandler}>
             Add a new car
           </button>
         </div>
+      ) : (
+        <div></div>
       )}
       {isLoading ? (
         <Spinner />
@@ -392,6 +402,8 @@ const EventPage = () => {
           events={events}
           authUserId={context.userId}
           onViewDetail={showDetailHandler}
+          onDelete = {deleteHandler}
+          isAdmin ={context.isAdmin}
         />
       )}
     </React.Fragment>
