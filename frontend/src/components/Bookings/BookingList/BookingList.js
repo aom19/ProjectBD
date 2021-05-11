@@ -28,6 +28,12 @@ const BookingList = (props) => (
               >
                 Cancel
               </button>
+              <button
+                className="btn"
+                onClick={props.onConfirm.bind(this, booking._id)}
+              >
+                Confirm
+              </button>
             </div>
           </div>
         </li>

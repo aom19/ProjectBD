@@ -52,7 +52,7 @@ const AuthPage = () => {
       requestBody = {
         query: `
           mutation CreateUser($email:String!, $password:String!){ 
-            createUser(userInput: {email :$email , password:$password" }){
+            createUser(userInput: {email :$email , password:$password }){
               _id
               email
             }

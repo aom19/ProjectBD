@@ -70,9 +70,18 @@ const transformBooking = (booking) => {
     updatedAt: dateToString(booking._doc.updatedAt),
   };
 };
+const transformBadUser = (badUser) => {
+  return {
+    ...badUser._doc,
+    _id: badUser.id,
+    user: user.bind(this, badUser._doc.user),
+    
+  };
+};
 
 // exports.user = user;
 //  exports.events = events;
 // exports.singleEvent = singleEvent;
 exports.transformBooking = transformBooking;
 exports.transformEvent = transformEvent;
+exports.transformBadUser = transformBadUser;

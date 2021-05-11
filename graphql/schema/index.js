@@ -37,6 +37,13 @@ type AuthData{
     isAdmin:String!
 }
 
+type BadUser{
+    _id :ID!
+    userId : ID!
+
+}
+
+
  input EventInput{
     numarInmatriculare: String!
     numarKilometri: String!
@@ -58,6 +65,8 @@ type RootQuery{
     events: [Event!]!
     bookings : [Booking!]!
     login(email :String! , password :String! ) : AuthData!
+    badUsers : [BadUser!]!
+    
 }
 
 type RootMutation{
@@ -65,6 +74,8 @@ type RootMutation{
     createUser(userInput : UserInput):User
     bookEvent(eventId : ID!):Booking!
     cancelBooking(bookingId : ID!): Event!
+    addToBlackList(userId:ID!) : BadUser!
+    
 
 }
 
