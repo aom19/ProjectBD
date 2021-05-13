@@ -62,4 +62,17 @@ module.exports = {
       throw err;
     }
   },
+
+  deleteEvent: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error("Unathenticathed");
+    }
+    try {
+      const event = await Event.findById(args.eventId);
+      await Event.deleteOne({ _id: args.eventId });
+      return event;
+    } catch (err) {
+      throw err;
+    }
+  },
 };

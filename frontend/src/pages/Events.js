@@ -237,9 +237,43 @@ const EventPage = () => {
         setIsLoading(false);
       });
   };
-  const deleteHandler =(eventId) =>{
-    console.log(eventId)
-  }
+  const deleteHandler = (eventId) => {
+    console.log(eventId);
+
+    const requestBody = {
+      query: `
+      mutation { 
+        deleteEvent(eventId : "${eventId}"){
+          _id
+        }
+      }
+    `,
+    };
+    const token = context.token;
+
+    fetch("http://localhost:8000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Failed");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        console.log(resData);
+        fetchEvents();
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  };
 
   return (
     <React.Fragment>
@@ -385,7 +419,7 @@ const EventPage = () => {
         </Modal>
       )}
 
-      {context.isAdmin === "true"  && context.token ? (
+      {context.isAdmin === "true" && context.token ? (
         <div className="events-controls">
           <p>Share new cars!!</p>
           <button className="btn" onClick={createHandler}>
@@ -402,8 +436,8 @@ const EventPage = () => {
           events={events}
           authUserId={context.userId}
           onViewDetail={showDetailHandler}
-          onDelete = {deleteHandler}
-          isAdmin ={context.isAdmin}
+          onDelete={deleteHandler}
+          isAdmin={context.isAdmin}
         />
       )}
     </React.Fragment>
