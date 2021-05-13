@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { graphqlHTTP } = require("express-graphql");
 
+const path = require("path");
+
 const mongoose = require("mongoose");
 
 const graphQlSchema = require("./graphql/schema/index");
@@ -16,15 +18,12 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
-  res.setHeader(
-     "Access-Control-Allow-Headers",
-    "Content-Type,Authorization"
-  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization");
 
   if (req.method === "OPTIONS") {
     return res.sendStatus(200);
   }
-  next(); 
+  next();
 });
 
 app.use(isAuth);
@@ -48,6 +47,11 @@ app.use(
     graphiql: true,
   })
 );
+
+app.use(express.static("public"));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "public", "index.html"));
+});
 
 mongoose
   .connect(
