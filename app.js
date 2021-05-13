@@ -58,7 +58,7 @@ app.get("*", (req, res) => {
 //     `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ku5rn.mongodb.net/${process.env.MONGO_NAME}?retryWrites=true&w=majority`
 //   )
 mongoose
-  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+  .connect(`${process.env.MONGODB_URI}?retryWrites=true&w=majority`, { useNewUrlParser: true })
   .then(() => {
     console.log("Server start at port " + PORT);
     console.log("MongoDB is connected");
