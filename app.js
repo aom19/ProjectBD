@@ -48,17 +48,17 @@ app.use(
   })
 );
 
-app.use(express.static(path.join(__dirname , "client" , "build" )));
+app.use(express.static(path.join(__dirname, "client", "build")));
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname,  "client" , "build", "index.html"));
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
-
-
+// mongoose
+//   .connect(
+//     `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ku5rn.mongodb.net/${process.env.MONGO_NAME}?retryWrites=true&w=majority`
+//   )
 mongoose
-  .connect(
-    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ku5rn.mongodb.net/${process.env.MONGO_NAME}?retryWrites=true&w=majority`
-  )
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
     console.log("Server start at port " + PORT);
     console.log("MongoDB is connected");
