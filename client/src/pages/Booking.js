@@ -17,20 +17,21 @@ const BookingPage = () => {
 
   useEffect(() => {
     fetchBookings();
-  }, []);
-  {
-    console.log(bookings);
-  }
+  }, [setBookings]);
+  
+
   const fetchBookings = () => {
     setIsLoading(true);
-    const requestBody = {
-      query: `
+    if (context.isAdmin === "false") {
+      const requestBody = {
+        query: `
       query { 
         bookings{
           _id
           createdAt
           user{
             _id
+            email
           }
           event{
               _id
@@ -47,37 +48,90 @@ const BookingPage = () => {
         }
       }
     `,
-    };
-    const token = context.token;
-    fetch("http://localhost:8000/graphql", {
-      method: "POST",
-      body: JSON.stringify(requestBody),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error("Failed");
-        }
-        return res.json();
+      };
+      const token = context.token;
+      fetch("http://localhost:8000/graphql", {
+        method: "POST",
+        body: JSON.stringify(requestBody),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
       })
-      .then((resData) => {
-        // console.log(resData);
-        const fetchedBookings = resData.data.bookings;
+        .then((res) => {
+          if (res.status !== 200 && res.status !== 201) {
+            throw new Error("Failed");
+          }
+          return res.json();
+        })
+        .then((resData) => {
+          // console.log(resData);
+          const fetchedBookings = resData.data.bookings;
 
-        setBookings(fetchedBookings);
-        setIsLoading(false);
+          setBookings(fetchedBookings);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsLoading(false);
+        });
+    } else if (context.isAdmin === "true") {
+      const requestBody = {
+        query: `
+      query { 
+        allBookings{
+          _id
+          createdAt
+          user{
+            _id
+            email
+          }
+          event{
+              _id
+              date,
+              description,
+              numarInmatriculare,
+              numarKilometri,
+              marca,
+              detaliiMarca,
+              clasa,
+              price,
+              urlImage,
+          }
+        }
+      }
+    `,
+      };
+      const token = context.token;
+      fetch("http://localhost:8000/graphql", {
+        method: "POST",
+        body: JSON.stringify(requestBody),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false);
-      });
+        .then((res) => {
+          if (res.status !== 200 && res.status !== 201) {
+            throw new Error("Failed");
+          }
+          return res.json();
+        })
+        .then((resData) => {
+          // console.log(resData);
+          const fetchedBookings = resData.data.allBookings;
+
+          setBookings(fetchedBookings);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsLoading(false);
+        });
+    }
   };
 
-  //add user to Black List
-{console.log(selectedBooking)}
+  
   const addToBlackList = () => {
     const requestBody = {
       query: `
@@ -118,7 +172,6 @@ const BookingPage = () => {
   const confirmHandler = async (bookingId) => {
     setConfirmBooking(true);
 
-    
     console.log(selectedBooking);
     addToBlackList();
 
@@ -214,6 +267,7 @@ const BookingPage = () => {
           bookings={bookings}
           onDelete={deleteBookingHandler}
           onConfirm={onShowModal}
+          isAdmin={context.isAdmin}
         />
       )}
     </React.Fragment>

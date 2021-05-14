@@ -21,6 +21,10 @@ module.exports = {
 
       const user = new User({
         email: args.userInput.email,
+        nume: args.userInput.nume,
+        prenume: args.userInput.prenume,
+        telefon: args.userInput.telefon,
+        address: args.userInput.address,
         password: hashedPassword,
       });
       const result = await user.save();
@@ -39,8 +43,8 @@ module.exports = {
 
     const user = await User.findOne({ email: email });
 
-   const isAdmin = adminId.equals(user);
-    
+    const isAdmin = adminId.equals(user);
+
     if (!user) {
       throw new Error("User does not exist");
     }
@@ -51,11 +55,17 @@ module.exports = {
     }
     //generate token
     const token = jwt.sign(
-      { userId: user.id, email: user.email , isAdmin : isAdmin },
+      { userId: user.id, email: user.email, isAdmin: isAdmin, email: email },
       //key to hash the token
       "somesupersecretkey",
       { expiresIn: "1h" }
     );
-    return { userId: user.id, token: token, tokenExpiration: 1 ,isAdmin:isAdmin };
+    return {
+      userId: user.id,
+      token: token,
+      tokenExpiration: 1,
+      isAdmin: isAdmin,
+      email: email,
+    };
   },
 };

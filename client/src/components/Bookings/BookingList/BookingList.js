@@ -20,21 +20,32 @@ const BookingList = (props) => (
                 Booking started date :
                 <i> {new Date(booking.createdAt).toLocaleDateString()}</i>
               </h2>
+              {props.isAdmin === "true" ? (
+                <h2>
+                  <b>Inchiriata de : {booking.user.email} </b>
+                </h2>
+              ) : (
+                <></>
+              )}
             </div>
-            <div className="booking__item-actions">
-              <button
-                className="btn"
-                onClick={props.onDelete.bind(this, booking._id)}
-              >
-                Cancel
-              </button>
-              <button
-                className="btn"
-                onClick={props.onConfirm.bind(this, booking._id)}
-              >
-                Confirm
-              </button>
-            </div>
+            {props.isAdmin === "true" ? (
+              <div className="booking__item-actions">
+                <button
+                  className="btn"
+                  onClick={props.onDelete.bind(this, booking._id)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn"
+                  onClick={props.onConfirm.bind(this, booking._id)}
+                >
+                  Confirm
+                </button>
+              </div>
+            ) : (
+              <> </>
+            )}
           </div>
         </li>
       );

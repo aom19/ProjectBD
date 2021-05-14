@@ -20,6 +20,7 @@ type Event {
     price: String!
     urlImage: String!
     description: String!
+    inchiriat : String!
     creator : User!
 
 }
@@ -27,14 +28,20 @@ type Event {
 type User{
     _id : ID!
     email:String!
-    password :String
-    createdEvents : [Event!]
+    password :String!
+    nume:String!
+    prenume:String!
+    telefon:String!
+    address:String!
+    createdEvents : [Event]
+
 }
 type AuthData{
     userId: ID!
     token : String!
     tokenExpiration : Int!
     isAdmin:String!
+    email:String!
 }
 
 type BadUser{
@@ -54,16 +61,23 @@ type BadUser{
     price: String!
     urlImage: String!
     description: String!
+    inchiriat : String!
 }
 input UserInput{
     email:String!
     password:String!
+    nume:String!
+    prenume:String!
+    telefon:String!
+    address:String!
 
 }
 
 type RootQuery{
     events: [Event!]!
     bookings : [Booking!]!
+    allBookings : [Booking!]!
+
     login(email :String! , password :String! ) : AuthData!
     badUsers : [BadUser!]!
     

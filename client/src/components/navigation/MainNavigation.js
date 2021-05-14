@@ -9,7 +9,8 @@ const MainNavigation = (props) => {
   return (
     <header className="main-navigation">
       <div className="main-navigation__logo">
-        <h1>Booking</h1>
+        <a href="http://localhost:3000/cars">Booking</a>
+        {/* <h1>Booking</h1> */}
       </div>
       <div className="main-navigation__items">
         <ul>
@@ -28,6 +29,9 @@ const MainNavigation = (props) => {
               </li>
               <li>
                 <button onClick={context.logout}> Logout</button>
+              </li>
+              <li>
+                {context.isAdmin === "true" ? "Admin" : `${context.email}`}
               </li>
             </React.Fragment>
           )}

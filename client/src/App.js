@@ -15,13 +15,14 @@ function App() {
     token: null,
     userId: null,
     isAdmin: null,
+    email: null,
   });
   console.log(values);
-  const login = (token, userId, tokenExpiration, isAdmin) => {
-    setValues({ token: token, userId: userId, isAdmin: isAdmin });
+  const login = (token, userId, tokenExpiration, isAdmin, email) => {
+    setValues({ token: token, userId: userId, isAdmin: isAdmin, email: email });
   };
   const logout = () => {
-    setValues({ token: null, userId: null, isAdmin: null });
+    setValues({ token: null, userId: null, isAdmin: null, email: null });
   };
 
   return (
@@ -32,6 +33,7 @@ function App() {
             token: values.token,
             userId: values.userId,
             isAdmin: values.isAdmin,
+            email: values.email,
             login: login,
             logout: logout,
           }}

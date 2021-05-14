@@ -33,14 +33,7 @@ const eventItem = (props) => (
             View Details
           </button>
 
-          {/* <button
-            className="btnn"
-            // onClick={props.onEdit.bind(this, props.eventId)}
-            // style={{ backgroundColor: "#01d1d1", color: "#f5e795"}}
-          >
-            Edit
-          </button> */}
-          {props.isAdmin && (
+          {props.isAdmin === "true" && (
             <button
               className="btnn"
               // style={{ backgroundColor: "linear-gradient(to left, 01d1d1, #6dd5ed);", color: "#ff5f0f" }}

@@ -61,8 +61,9 @@ mongoose
   .then(() => {
     console.log("Server start at port " + PORT);
     console.log("MongoDB is connected");
+    app.listen(PORT);
   })
   .catch((err) => {
     console.log(err);
   });
-app.listen(PORT);
+

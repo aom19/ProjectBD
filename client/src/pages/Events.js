@@ -10,8 +10,11 @@ import Spinner from "../components/Spiner/Spinner";
 const EventPage = () => {
   const [creating, setCreating] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState();
-  // const eventss = [];/
+  const newbooks = [];
   const [events, setEvents] = useState([]);
+  const [bookings, setBookings] = useState([]);
+  const [newBookings, setNewBookings] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState({
     numarInmatriculare: "",
@@ -25,6 +28,27 @@ const EventPage = () => {
     description: "",
   });
   const context = useContext(AuthContext);
+
+  useEffect(() => {
+    fetchEvents();
+    fetchBookings();
+  }, []);
+
+  useEffect(() => {
+    bookedCarHandler();
+  }, [bookings]);
+
+  const bookedCarHandler = () => {
+    bookings.map((book) => {
+      newbooks.push(book.event);
+    });
+
+    const results = events.filter(
+      ({ _id: value1 }) =>
+        !newbooks.some(({ _id: value2 }) => value1 === value2)
+    );
+    setNewBookings(results);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -130,14 +154,51 @@ const EventPage = () => {
       });
   };
 
+  const fetchBookings = () => {
+    const requestBody = {
+      query: `
+      query { 
+        allBookings{
+          event{
+              _id
+           
+          }
+        }
+      }
+    `,
+    };
+    const token = context.token;
+    fetch("http://localhost:8000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Failed");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        // console.log(resData);
+        const fetchedBookings = resData.data.allBookings;
+
+        setBookings(fetchedBookings);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  };
+
   const modalCancelHandler = () => {
     setCreating(false);
     setSelectedEvent(null);
   };
-
-  useEffect(() => {
-    fetchEvents();
-  }, []);
 
   const fetchEvents = () => {
     setIsLoading(true);
@@ -433,7 +494,10 @@ const EventPage = () => {
         <Spinner />
       ) : (
         <EventList
-          events={events}
+        // {
+        //   context.token === null
+        // }
+          events={context.token === null ? events : newBookings}
           authUserId={context.userId}
           onViewDetail={showDetailHandler}
           onDelete={deleteHandler}

@@ -4,6 +4,7 @@ import "./EventList.css";
 import EventItem from "./EventItem/EventItem";
 
 const eventList = (props) => {
+  console.log(props.events);
   const events = props.events.map((event) => {
     return (
       <EventItem
@@ -19,7 +20,7 @@ const eventList = (props) => {
         creatorId={event.creator._id}
         userId={props.authUserId}
         onDetail={props.onViewDetail}
-        onDelete ={props.onDelete}
+        onDelete={props.onDelete}
         isAdmin={props.isAdmin}
       />
     );

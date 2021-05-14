@@ -11,6 +11,22 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  nume: {
+    type: String,
+    required: true,
+  },
+  prenume: {
+    type: String,
+    required: true,
+  },
+  telefon: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
   //to knnow which user create which event(booking) || relations ( user - events(booking));
   createdEvents: [
     //   //store a list//array of id;

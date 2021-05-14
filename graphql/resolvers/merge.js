@@ -18,12 +18,15 @@ const user = async (userId) => {
     return {
       ...user._doc,
       _id: user.id,
+      email: user._doc.email,
+
       createdEvents: () => eventLoader.loadMany(user._doc.createdEvents),
     };
   } catch (err) {
     throw err;
   }
 };
+
 //fetch one event
 const singleEvent = async (eventId) => {
   try {
@@ -65,17 +68,18 @@ const transformBooking = (booking) => {
     ...booking._doc,
     _id: booking.id,
     user: user.bind(this, booking._doc.user),
+    // userEmail: user.bind(this, booking._doc.user.email),
     event: singleEvent.bind(this, booking._doc.event),
     createdAt: dateToString(booking._doc.createdAt),
     updatedAt: dateToString(booking._doc.updatedAt),
   };
 };
+
 const transformBadUser = (badUser) => {
   return {
     ...badUser._doc,
     _id: badUser.id,
     user: user.bind(this, badUser._doc.user),
-    
   };
 };
 

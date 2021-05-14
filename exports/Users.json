@@ -1,0 +1,43 @@
+[{
+  "_id": {
+    "$oid": "605851d78057ed0071223973"
+  },
+  "createdEvents": [
+    {
+      "$oid": "606edd2213bd87898ab4b287"
+    },
+    {
+      "$oid": "606edd6c13bd87898ab4b288"
+    },
+    {
+      "$oid": "606edd9c13bd87898ab4b289"
+    },
+    {
+      "$oid": "606eddb213bd87898ab4b28a"
+    },
+    {
+      "$oid": "609a46c4ab5c2039cc055605"
+    },
+    {
+      "$oid": "609a4778ab5c2039cc055606"
+    }
+  ],
+  "email": "atum45d@gmail.com",
+  "password": "$2a$12$eKwVsISIYk4GogdZaOePteTyCN4aHxNt3waLqrS7xEnihXKnnOo5a",
+  "__v": 24
+},{
+  "_id": {
+    "$oid": "60624f07e0a8ee5d7b573a17"
+  },
+  "email": "atum34d@gmail.com",
+  "password": "$2a$12$DWhdDrn.9hPiUNuNxDHMZeOjeIE4nojjZzwT/0XKfQTYNYVfQqas2",
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "609a777dcf354944bf33bd16"
+  },
+  "createdEvents": [],
+  "email": "atum44d@gmail.com",
+  "password": "$2a$12$ED/.f1kzT2vx9lxe5NK/0etThihdika3sZI/Ps8KUQuVgDGPxvfmC",
+  "__v": 0
+}]

@@ -12,10 +12,11 @@
   box-sizing: border-box;
 }
 
-.main-navigation__logo h1 {
+.main-navigation__logo a {
   margin: 0;
   font-size: 1.5rem;
   color: #dfcefc;
+  text-decoration: none;
 }
 
 .main-navigation__items {

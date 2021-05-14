@@ -1,0 +1,77 @@
+[{
+  "_id": {
+    "$oid": "606edd2213bd87898ab4b287"
+  },
+  "numarInmatriculare": "daasad",
+  "numarKilometri": 20202,
+  "marca": "BMW",
+  "detaliiMarca": "m420",
+  "clasa": "Sedan",
+  "urlImage": "https://images.pexels.com/photos/2127039/pexels-photo-2127039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "description": "HMM",
+  "price": 100,
+  "date": {
+    "$date": "2021-04-06T00:36:00Z"
+  },
+  "creator": {
+    "$oid": "605851d78057ed0071223973"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "606edd9c13bd87898ab4b289"
+  },
+  "numarInmatriculare": "daasad",
+  "numarKilometri": 20202,
+  "marca": "Lamborghini",
+  "detaliiMarca": "Huracan",
+  "clasa": "Sedan",
+  "urlImage": "https://images.pexels.com/photos/5213525/pexels-photo-5213525.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  "description": "HMM",
+  "price": 32,
+  "date": {
+    "$date": "2021-04-06T00:36:00Z"
+  },
+  "creator": {
+    "$oid": "605851d78057ed0071223973"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "609a46c4ab5c2039cc055605"
+  },
+  "numarInmatriculare": "B2364§",
+  "numarKilometri": 50049,
+  "marca": "Mercedes Benz",
+  "detaliiMarca": "SUV",
+  "clasa": "G-Class",
+  "urlImage": "https://images.pexels.com/photos/6453067/pexels-photo-6453067.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  "description": "SUV",
+  "price": 10,
+  "date": {
+    "$date": "2020-01-16T09:55:00Z"
+  },
+  "creator": {
+    "$oid": "605851d78057ed0071223973"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "609a4778ab5c2039cc055606"
+  },
+  "numarInmatriculare": "DV60252",
+  "numarKilometri": 43202,
+  "marca": "Ford",
+  "detaliiMarca": "Muscle Car",
+  "clasa": "Mustang",
+  "urlImage": "https://images.pexels.com/photos/4180989/pexels-photo-4180989.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+  "description": "Muscle Car",
+  "price": 15,
+  "date": {
+    "$date": "1978-02-22T09:58:00Z"
+  },
+  "creator": {
+    "$oid": "605851d78057ed0071223973"
+  },
+  "__v": 0
+}]
