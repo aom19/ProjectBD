@@ -5,14 +5,14 @@
   "main": "app.js",
   "scripts": {
    
-    "start": "nodemon app.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "start": "node app.js"
+
   },
 
   "author": "",
   "license": "ISC",
 
-  "homepage": "https://github.com/aom19/ProjectBD/react-deploy",
+
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

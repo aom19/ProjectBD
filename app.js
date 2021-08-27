@@ -55,7 +55,7 @@ app.get("*", (req, res) => {
 
 mongoose
   .connect(
-    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ku5rn.mongodb.net/${process.env.MONGO_NAME}?retryWrites=true&w=majority`
+    `mongodb+srv://Anton:X09NKnZxyXOSIXxH@cluster0.mdy4n.mongodb.net/ProjectBD?retryWrites=true&w=majority`
   )
 
   .then(() => {
@@ -66,4 +66,3 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-

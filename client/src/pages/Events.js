@@ -493,16 +493,25 @@ const EventPage = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <EventList
-        // {
-        //   context.token === null
-        // }
-          events={context.token === null ? events : newBookings}
-          authUserId={context.userId}
-          onViewDetail={showDetailHandler}
-          onDelete={deleteHandler}
-          isAdmin={context.isAdmin}
-        />
+        <>
+          <h2>
+            
+            {context.token === null
+              ? "Please login , some cars can be booked !"
+              : ""}
+          </h2>
+          <EventList
+            // {
+            //   context.token === null
+            // }
+
+            events={context.token === null ? events : newBookings}
+            authUserId={context.userId}
+            onViewDetail={showDetailHandler}
+            onDelete={deleteHandler}
+            isAdmin={context.isAdmin}
+          />
+        </>
       )}
     </React.Fragment>
   );
