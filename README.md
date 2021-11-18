@@ -1,9 +1,12 @@
 # Booking Cars App 
 
+## Screen Shots 
+
+<img width="1302" alt="Screen Shot 2021-11-18 at 4 00 42 PM" src="https://user-images.githubusercontent.com/39848284/142429520-670b3bc7-e005-4563-b78c-c2ab5b41b0d0.png">
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+What things you need to install :
 
 ```
 Node js
