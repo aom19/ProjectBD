@@ -1,6 +1,5 @@
 # Project Title
-
-    ## Booking Cars App Backend
+## Booking Cars App Backend
 
 ## Getting Started
 
