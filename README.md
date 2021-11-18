@@ -2,7 +2,8 @@
 
 
 ## UML 
-<img width="1101" alt="Screen Shot 2021-11-18 at 4 27 14 PM" src="https://user-images.githubusercontent.com/39848284/142434042-52d5756d-a600-417f-9e7e-6115c7b76973.png">
+<img width="1126" alt="Screen Shot 2021-11-18 at 4 30 48 PM" src="https://user-images.githubusercontent.com/39848284/142434641-80d0fdcf-d003-46dd-a3ae-959d70ec8b86.png">
+
 
 ## Screen Shots 
 
