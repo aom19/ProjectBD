@@ -1,13 +1,5 @@
-# Project Title
+# Booking Cars App 
 
-## Booking Cars App Backend
-
-## Getting Started
-
-   ###  npm install to install all the dependencies
-   ###  run to start the app
-
-Go to http://localhost:3000/graphql
 
 ### Prerequisites
 
@@ -38,9 +30,17 @@ A step by step series of examples that tell you how to get a development env run
 - [Mongo DB](https://docs.mongodb.com/) - NONSQL Database
 - [GraphQL](https://graphql.org/) - GraphQL is a query language for APIs and a runtime for fulfilling those queries
 
-## Contributing
 
-## Versioning
+
+## Getting Started
+
+   ###  ```npm install ``` to install all the dependencies
+   ###   ```npm start``` to start the app
+
+Go to http://localhost:3000/graphql
+
+
+
 
 ## Authors
 
