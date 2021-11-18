@@ -29,25 +29,7 @@ A step by step series of examples that tell you how to get a development env run
 
     Chrome extension for GraphQL Playground - can find here "https://chrome.google.com/webstore/detail/graphql-playground-for-ch/kjhjcgclphafojaeeickcokfbhlegecd?hl=ro"
 
-## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Built With
 
@@ -63,8 +45,7 @@ Give an example
 ## Authors
 
 - **Ostopovici Anton** - _Initial work_ - [aom19](https://github.com/aom19)
-- **Simion Marina** - _Initial work_ - [marina](https://github.com/SimionMarina)
-- **Lazar Catalin** - _Initial work_ - [Catalin](https://github.com/Berlici)
+
 
 ## License
 
