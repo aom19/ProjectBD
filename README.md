@@ -1,10 +1,11 @@
 # Project Title
+
 ## Booking Cars App Backend
 
 ## Getting Started
 
-    ###  npm install to install all the dependencies
-    ###  run to start the app
+   ###  npm install to install all the dependencies
+   ###  run to start the app
 
 Go to http://localhost:3000/graphql
 
