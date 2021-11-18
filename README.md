@@ -2,7 +2,8 @@
 
 ## Screen Shots 
 
-<img width="1302" alt="Screen Shot 2021-11-18 at 4 00 42 PM" src="https://user-images.githubusercontent.com/39848284/142429520-670b3bc7-e005-4563-b78c-c2ab5b41b0d0.png">
+
+<img width="1340" alt="Screen Shot 2021-11-18 at 4 05 18 PM" src="https://user-images.githubusercontent.com/39848284/142430214-d413639b-7b4e-4ba2-9335-47002e68c1fd.png">
 
 ### Prerequisites
 
