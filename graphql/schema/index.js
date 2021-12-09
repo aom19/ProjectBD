@@ -7,31 +7,49 @@ type Booking{
     user: User!
     createdAt: String!
     updatedAt: String!
+    pickUpLocation:String!
+    pickUpDate:String!
+    dropOffLocation:String!
+    dropOffDate:String!
 }
 
 type Event {
     _id : ID!
-    numarInmatriculare: String!
-    numarKilometri: String!
-    date: String!
-    marca: String!
-    detaliiMarca: String!
-    clasa:String!
+    make: String!
+    model: String!
+    description: String
+    mileage: String!
+    transmision:String!
+    seats: String!
+    luggage: String!
+    fuel: String!
+    airConditions: String!
+    GPS: String!
+    childSeat: String!
+    music: String!
+    seatBelts: String!
+    sleepingBed: String!
+    water: String!
+    bluetooth: String!
+    onBoardComputer: String!
+    audioInput: String!
+    carKit: String!
+    remoteLocking: String!
+    climateControl: String!
     price: String!
     urlImage: String!
-    description: String!
-    inchiriat : String!
+    
+    
     creator : User!
-
 }
 
 type User{
     _id : ID!
     email:String!
     password :String!
-    nume:String!
-    prenume:String!
-    telefon:String!
+    firstName:String!
+    lastName:String!
+    phoneNumber:String!
     address:String!
     createdEvents : [Event]
 
@@ -52,25 +70,46 @@ type BadUser{
 
 
  input EventInput{
-    numarInmatriculare: String!
-    numarKilometri: String!
-    date: String!
-    marca: String!
-    detaliiMarca: String!
-    clasa:String!
+    make: String!
+    model: String!
+    description: String
+    mileage: String!
+    transmision:String!
+    seats: String!
+    luggage: String!
+    fuel: String!
+    airConditions: String!
+    GPS: String!
+    childSeat: String!
+    music: String!
+    seatBelts: String!
+    sleepingBed: String!
+    water: String!
+    bluetooth: String!
+    onBoardComputer: String!
+    audioInput: String!
+    carKit: String!
+    remoteLocking: String!
+    climateControl: String!
     price: String!
     urlImage: String!
-    description: String!
-    inchiriat : String!
+   
+    
 }
 input UserInput{
     email:String!
     password:String!
-    nume:String!
-    prenume:String!
-    telefon:String!
+    firstName:String!
+    lastName:String!
+    phoneNumber:String!
     address:String!
 
+}
+input BookingInput{
+    pickUpLocation:String!
+    pickUpDate:String!
+    dropOffLocation:String!
+    dropOffDate:String!
 }
 
 type RootQuery{
@@ -87,7 +126,7 @@ type RootMutation{
     createEvent(eventInput : EventInput):Event
     deleteEvent(eventId:ID!):Event!
     createUser(userInput : UserInput):User
-    bookEvent(eventId : ID!):Booking!
+    bookEvent(eventId : ID!, bookingInput :BookingInput):Booking
     cancelBooking(bookingId : ID!): Event!
     addToBlackList(userId:ID!) : BadUser!
     

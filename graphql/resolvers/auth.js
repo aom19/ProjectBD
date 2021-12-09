@@ -21,9 +21,9 @@ module.exports = {
 
       const user = new User({
         email: args.userInput.email,
-        nume: args.userInput.nume,
-        prenume: args.userInput.prenume,
-        telefon: args.userInput.telefon,
+        firstName: args.userInput.firstName,
+        lastName: args.userInput.lastName,
+        phoneNumber: args.userInput.phoneNumber,
         address: args.userInput.address,
         password: hashedPassword,
       });
@@ -55,17 +55,17 @@ module.exports = {
     }
     //generate token
     const token = jwt.sign(
-      { userId: user.id, email: user.email, isAdmin: isAdmin, email: email },
+      { userId: user.id, email: user.email, isAdmin: isAdmin },
       //key to hash the token
       "somesupersecretkey",
       { expiresIn: "1h" }
     );
     return {
-      userId: user.id,
+      // userId: user.id,
       token: token,
       tokenExpiration: 1,
-      isAdmin: isAdmin,
-      email: email,
+      // isAdmin: isAdmin,
+      // email: email,
     };
   },
 };

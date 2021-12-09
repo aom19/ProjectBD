@@ -12,6 +12,22 @@ const bookingSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    pickUpLocation: {
+      type: String,
+      required: true,
+    },
+    pickUpDate: {
+      type: String,
+      required: true,
+    },
+    dropOffLocation: {
+      type: String,
+      required: true,
+    },
+    dropOffDate: {
+      type: String,
+      required: true,
+    },
   },
   {
     //created/updaated field

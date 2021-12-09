@@ -11,15 +11,15 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  nume: {
+  firstName: {
     type: String,
     required: true,
   },
-  prenume: {
+  lastName: {
     type: String,
     required: true,
   },
-  telefon: {
+  phoneNumber: {
     type: String,
     required: true,
   },

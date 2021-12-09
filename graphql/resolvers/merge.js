@@ -59,7 +59,7 @@ const transformEvent = (event) => {
   return {
     ...event._doc,
     _id: event.id,
-    date: dateToString(event._doc.date),
+   
     creator: user.bind(this, event.creator),
   };
 };
@@ -72,6 +72,8 @@ const transformBooking = (booking) => {
     event: singleEvent.bind(this, booking._doc.event),
     createdAt: dateToString(booking._doc.createdAt),
     updatedAt: dateToString(booking._doc.updatedAt),
+    pickUpDate: dateToString(booking._doc.pickUpDate),
+    dropOffDate: dateToString(booking._doc.dropOffDate),
   };
 };
 

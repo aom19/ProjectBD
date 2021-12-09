@@ -3,12 +3,14 @@ import image1 from "../assets/bg_1.jpg";
 import image3 from "../assets/bg_7.jpeg";
 
 import Footer from "../components/Footer/Footer";
+import Section from "../components/Section/Section";
 import "./Home.css";
 const Contact = () => {
   return (
     <>
       <div>
-        <section
+        <Section image={image1} page={"Contact"} name={"Contact Us"} />
+        {/* <section
           class="hero-wrap hero-wrap-2 js-fullheight ftco-degree-bg"
           style={{
             backgroundImage: `url(${image3})`,
@@ -32,7 +34,7 @@ const Contact = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section class="ftco-section contact-section">
           <div class="container">

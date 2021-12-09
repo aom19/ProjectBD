@@ -24,7 +24,7 @@ module.exports = {
     if (!req.isAuth) {
       throw new Error("Unathenticathed");
     }
-    
+
     try {
       const allBookings = await Booking.find();
 
@@ -41,9 +41,14 @@ module.exports = {
       throw new Error("Unathenticathed");
     }
     const fetchedEvent = await Event.findOne({ _id: args.eventId });
+    console.log(args);
     const booking = new Booking({
       user: req.userId,
       event: fetchedEvent,
+      pickUpLocation: args.bookingInput.pickUpLocation,
+      pickUpDate: new Date(args.bookingInput.pickUpDate),
+      dropOffLocation: args.bookingInput.dropOffLocation,
+      dropOffDate: new Date(args.bookingInput.dropOffDate),
     });
     const result = await booking.save();
     return transformBooking(result);
@@ -55,6 +60,7 @@ module.exports = {
     }
     try {
       const booking = await Booking.findById(args.bookingId).populate("event");
+      console.log(args.bookingId);
       const event = transformEvent(booking.event);
       await Booking.deleteOne({ _id: args.bookingId });
       return event;

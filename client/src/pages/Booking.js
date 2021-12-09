@@ -1,10 +1,17 @@
 import { Token } from "graphql";
+import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../context/auth-context";
 import Spinner from "../components/Spiner/Spinner";
 import Modal from "../components/Modal/Modal";
 import Backdrop from "../components/Backdrop/Backdrop";
 import BookingList from "../components/Bookings/BookingList/BookingList";
+
+import image1 from "../assets/bg_7.jpeg";
+
+import Section from "../components/Section/Section";
+import * as carsActions from "../features/actions/cars";
+import * as bookingActions from "../features/actions/booking";
 
 const BookingPage = () => {
   const [bookings, setBookings] = useState([]);
@@ -14,170 +21,170 @@ const BookingPage = () => {
   const [badUser, setBadUser] = useState();
 
   const context = useContext(AuthContext);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    fetchBookings();
-  }, [setBookings]);
-  
+  useEffect(async () => {
+    await dispatch(carsActions.fetchCars());
+    await dispatch(bookingActions.fetchBookings());
+    // await dispatch(bookingActions.fetchAllBookings());
+  }, []);
+  // const fetchBookings = () => {
+  //   setIsLoading(true);
+  //   if (context.isAdmin === "false") {
+  //     const requestBody = {
+  //       query: `
+  //     query {
+  //       bookings{
+  //         _id
+  //         createdAt
+  //         user{
+  //           _id
+  //           email
+  //         }
+  //         event{
+  //             _id
+  //             date,
+  //             description,
+  //             numarInmatriculare,
+  //             numarKilometri,
+  //             marca,
+  //             detaliiMarca,
+  //             clasa,
+  //             price,
+  //             urlImage,
+  //         }
+  //       }
+  //     }
+  //   `,
+  //     };
+  //     const token = context.token;
+  //     fetch("http://localhost:8000/graphql", {
+  //       method: "POST",
+  //       body: JSON.stringify(requestBody),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: "Bearer " + token,
+  //       },
+  //     })
+  //       .then((res) => {
+  //         if (res.status !== 200 && res.status !== 201) {
+  //           throw new Error("Failed");
+  //         }
+  //         return res.json();
+  //       })
+  //       .then((resData) => {
+  //         // console.log(resData);
+  //         const fetchedBookings = resData.data.bookings;
 
-  const fetchBookings = () => {
-    setIsLoading(true);
-    if (context.isAdmin === "false") {
-      const requestBody = {
-        query: `
-      query { 
-        bookings{
-          _id
-          createdAt
-          user{
-            _id
-            email
-          }
-          event{
-              _id
-              date,
-              description,
-              numarInmatriculare,
-              numarKilometri,
-              marca,
-              detaliiMarca,
-              clasa,
-              price,
-              urlImage,
-          }
-        }
-      }
-    `,
-      };
-      const token = context.token;
-      fetch("http://localhost:8000/graphql", {
-        method: "POST",
-        body: JSON.stringify(requestBody),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      })
-        .then((res) => {
-          if (res.status !== 200 && res.status !== 201) {
-            throw new Error("Failed");
-          }
-          return res.json();
-        })
-        .then((resData) => {
-          // console.log(resData);
-          const fetchedBookings = resData.data.bookings;
+  //         setBookings(fetchedBookings);
+  //         setIsLoading(false);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         setIsLoading(false);
+  //       });
+  //   } else if (context.isAdmin === "true") {
+  //     const requestBody = {
+  //       query: `
+  //     query {
+  //       allBookings{
+  //         _id
+  //         createdAt
+  //         user{
+  //           _id
+  //           email
+  //         }
+  //         event{
+  //             _id
+  //             date,
+  //             description,
+  //             numarInmatriculare,
+  //             numarKilometri,
+  //             marca,
+  //             detaliiMarca,
+  //             clasa,
+  //             price,
+  //             urlImage,
+  //         }
+  //       }
+  //     }
+  //   `,
+  //     };
+  //     const token = context.token;
+  //     fetch("http://localhost:8000/graphql", {
+  //       method: "POST",
+  //       body: JSON.stringify(requestBody),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: "Bearer " + token,
+  //       },
+  //     })
+  //       .then((res) => {
+  //         if (res.status !== 200 && res.status !== 201) {
+  //           throw new Error("Failed");
+  //         }
+  //         return res.json();
+  //       })
+  //       .then((resData) => {
+  //         // console.log(resData);
+  //         const fetchedBookings = resData.data.allBookings;
 
-          setBookings(fetchedBookings);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setIsLoading(false);
-        });
-    } else if (context.isAdmin === "true") {
-      const requestBody = {
-        query: `
-      query { 
-        allBookings{
-          _id
-          createdAt
-          user{
-            _id
-            email
-          }
-          event{
-              _id
-              date,
-              description,
-              numarInmatriculare,
-              numarKilometri,
-              marca,
-              detaliiMarca,
-              clasa,
-              price,
-              urlImage,
-          }
-        }
-      }
-    `,
-      };
-      const token = context.token;
-      fetch("http://localhost:8000/graphql", {
-        method: "POST",
-        body: JSON.stringify(requestBody),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      })
-        .then((res) => {
-          if (res.status !== 200 && res.status !== 201) {
-            throw new Error("Failed");
-          }
-          return res.json();
-        })
-        .then((resData) => {
-          // console.log(resData);
-          const fetchedBookings = resData.data.allBookings;
+  //         setBookings(fetchedBookings);
+  //         setIsLoading(false);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         setIsLoading(false);
+  //       });
+  //   }
+  // };
 
-          setBookings(fetchedBookings);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setIsLoading(false);
-        });
-    }
-  };
+  // const addToBlackList = () => {
+  //   const requestBody = {
+  //     query: `
+  //   mutation {
+  //     addToBlackList(userId : "${badUser}"){
+  //       _id
+  //     }
+  //   }
+  // `,
+  //   };
+  //   const token = context.token;
 
-  
-  const addToBlackList = () => {
-    const requestBody = {
-      query: `
-    mutation { 
-      addToBlackList(userId : "${badUser}"){
-        _id
-      }
-    }
-  `,
-    };
-    const token = context.token;
+  //   fetch("http://localhost:8000/graphql", {
+  //     method: "POST",
+  //     body: JSON.stringify(requestBody),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: "Bearer " + token,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (res.status !== 200 && res.status !== 201) {
+  //         throw new Error("Failed");
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((resData) => {
+  //       console.log(resData);
+  //       deleteBookingHandler(selectedBooking);
+  //     })
 
-    fetch("http://localhost:8000/graphql", {
-      method: "POST",
-      body: JSON.stringify(requestBody),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error("Failed");
-        }
-        return res.json();
-      })
-      .then((resData) => {
-        console.log(resData);
-        deleteBookingHandler(selectedBooking);
-      })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       setIsLoading(false);
+  //     });
+  // };
 
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false);
-      });
-  };
+  // const confirmHandler = async (bookingId) => {
+  //   setConfirmBooking(true);
 
-  const confirmHandler = async (bookingId) => {
-    setConfirmBooking(true);
+  //   console.log(selectedBooking);
+  //   addToBlackList();
 
-    console.log(selectedBooking);
-    addToBlackList();
-
-    // deleteBookingHandler(bookingId);
-    setConfirmBooking(false);
-  };
+  //   // deleteBookingHandler(bookingId);
+  //   setConfirmBooking(false);
+  // };
 
   const deleteBookingHandler = (bookingId) => {
     setConfirmBooking(false);
@@ -238,7 +245,46 @@ const BookingPage = () => {
 
   return (
     <React.Fragment>
-      {confirmBooking && <Backdrop />}
+      <div
+        style={{
+          // backgroundColor: "blue",
+          width: "100%",
+          height: "72vh",
+        }}
+      >
+        <Section image={image1} name={"Bookings"} />
+        <section className="ftco-section ">
+          <BookingList />
+        </section>
+
+        {/* <section
+          class="hero-wrap hero-wrap-2 js-fullheight ftco-degree-bg"
+          style={{
+            backgroundImage: `url(${image1})`,
+            // backgroundSize: "cover",
+            backgroundPosition: "center",
+            // overflow: "hidden",
+            zIndex: -999,
+          }}
+          data-stellar-background-ratio="0.5"
+        >
+          <div class="overlay"></div>
+          <div class="container">
+            <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+              <div class="col-md-9  pb-5">
+                <p class="breadcrumbs">
+                  <span>
+                    About us <i class="ion-ios-arrow-forward"></i>
+                  </span>
+                </p>
+                <h1 class="mb-3 bread">About Us</h1>
+              </div>
+            </div>
+          </div>
+        </section> */}
+      </div>
+
+      {/* {confirmBooking && <Backdrop />}
       {confirmBooking && selectedBooking && (
         <Modal
           buttonTitle="Add to Black List"
@@ -247,13 +293,13 @@ const BookingPage = () => {
           canConfirm
           onCancel={() => deleteBookingHandler(selectedBooking)}
           onConfirm={() => confirmHandler(selectedBooking._id)}
-          //  onCancel={modalCancelHandler}
-          //  onConfirm={bookEventHandler}
+           onCancel={modalCancelHandler}
+           onConfirm={bookEventHandler}
         >
-          {/* <h1>{selectedEvent.clasa}</h1>
+          <h1>{selectedEvent.clasa}</h1>
          <h2>${selectedEvent.price}</h2>
          <h2>{new Date(selectedEvent.date).toDateString()}</h2>
-         <p>{selectedEvent.description}</p> */}
+         <p>{selectedEvent.description}</p>
           <div>
             <h1 style={{ textAlign: "center" }}>Confirm Booking</h1>
             <h2>Do you want to add this user to Black List?</h2>
@@ -269,7 +315,7 @@ const BookingPage = () => {
           onConfirm={onShowModal}
           isAdmin={context.isAdmin}
         />
-      )}
+      )} */}
     </React.Fragment>
   );
 };

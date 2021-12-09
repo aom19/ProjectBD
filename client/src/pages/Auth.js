@@ -2,12 +2,17 @@ import React, { Component, useState, useContext } from "react";
 
 import { useDispatch } from "react-redux";
 
-import { login } from "../features/userSlice";
+// import { login, signup } from "../features/reducers/userSlice";
 import "./Auth.scss";
 import AuthContext from "../context/auth-context";
 import Alert from "@material-ui/lab/Alert";
 
-import image3 from "../assets/img1.jpeg";
+import image1 from "../assets/img1.jpeg";
+
+import * as authActions from "../features/actions/auth";
+import * as bookingActions from "../features/actions/booking";
+
+import Section from "../components/Section/Section";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -16,9 +21,9 @@ const AuthPage = () => {
   const [values, setValues] = useState({
     email: "",
     password: "",
-    nume: "",
-    prenume: "",
-    telefon: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
     address: "",
   });
 
@@ -38,16 +43,56 @@ const AuthPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const email = values.email;
     const password = values.password;
-    const nume = values.nume;
-    const prenume = values.prenume;
-    const telefon = values.telefon;
+    const firstName = values.firstName;
+    const lastName = values.lastName;
+    const phoneNumber = values.phoneNumber;
     const address = values.address;
 
-    dispatch(login({ email: email, password: password, loggedIn: true }));
+    if (!isLogin) {
+      // action = authActions.signup(
+      //   formState.inputValues.email,
+      //   formState.inputValues.password
+      // );
+      // dispatch(
+      //   signup({
+      //     email: email,
+      //     password: password,
+      //     firstName: firstName,
+      //     lastName: lastName,
+      //     phoneNumber: phoneNumber,
+      //     address: address,
+      //   })
+      // );
+      let action = authActions.signup(
+        email,
+        password,
+        firstName,
+        lastName,
+        phoneNumber,
+        address
+      );
+      try {
+        await dispatch(action);
+        // await dispatch(bookingActions.fetchBookings());
+        // props.navigation.navigate('Shop');
+      } catch (err) {
+        console.log(err.message);
+      }
+    } else {
+      // dispatch(login({ email: email, password: password }));
+      let action = authActions.login(email, password);
+      try {
+        await dispatch(action);
+        await dispatch(bookingActions.fetchBookings());
+        // props.navigation.navigate('Shop');
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
 
     // if (email.trim().length === 0 || password.trim().length === 0) {
     //   setIsError(true);
@@ -125,7 +170,12 @@ const AuthPage = () => {
   return (
     <div>
       <div>
-        <section
+        <Section
+          image={image1}
+          page={!isLogin ? "Sign Up" : "Sign In"}
+          name={!isLogin ? "Sign Up" : "Sign In"}
+        />
+        {/* <section
           class="hero-wrap hero-wrap-2 js-fullheight ftco-degree-bg"
           style={{
             backgroundImage: `url(${image3})`,
@@ -149,10 +199,9 @@ const AuthPage = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
       <div className="container">
-        
         <div className="log-form">
           <form className="col-md-12" onSubmit={handleSubmit}>
             <h2>{isLogin ? "Please  Sign In" : "Please Sign Up"}</h2>
@@ -207,30 +256,30 @@ const AuthPage = () => {
                 <div className="form-control">
                   <input
                     type="text"
-                    id="nume"
-                    name="nume"
-                    placeholder="Name"
-                    value={values.nume}
+                    id="firstName"
+                    name="firstName"
+                    placeholder="First Name"
+                    value={values.firstName}
                     onChange={handleChange}
                   />
                 </div>
                 <div className="form-control">
                   <input
                     type="text"
-                    id="prenume"
-                    name="prenume"
+                    id="lastName"
+                    name="lastName"
                     placeholder="Last Name"
-                    value={values.prenume}
+                    value={values.lastName}
                     onChange={handleChange}
                   />
                 </div>
                 <div className="form-control">
                   <input
                     type="text"
-                    id="telefon"
-                    name="telefon"
-                    placeholder="Numar Telefon"
-                    value={values.telefonn}
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    value={values.phoneNumber}
                     onChange={handleChange}
                   />
                 </div>

@@ -1,4 +1,4 @@
-const { dateToString } = require("../../helpers/date");
+const mongoose = require("mongoose");
 const Event = require("../../models/event");
 const User = require("../../models/user");
 const { transformEvent } = require("./merge");
@@ -22,20 +22,38 @@ module.exports = {
   },
 
   createEvent: async (args, req) => {
+    console.log(req.isAuth);
     if (!req.isAuth) {
       throw new Error("Unathenticathed");
     }
 
     const event = new Event({
-      numarInmatriculare: args.eventInput.numarInmatriculare,
-      numarKilometri: args.eventInput.numarKilometri,
-      marca: args.eventInput.marca,
-      detaliiMarca: args.eventInput.detaliiMarca,
-      clasa: args.eventInput.clasa,
+      make: args.eventInput.make,
+      model: args.eventInput.model,
+      description: args.eventInput.description,
+      airConditions: args.eventInput.airConditions,
+      mileage: args.eventInput.mileage,
+      transmision: args.eventInput.transmision,
+      seats: args.eventInput.seats,
+      luggage: args.eventInput.luggage,
+      fuel: args.eventInput.fuel,
+      GPS: args.eventInput.GPS,
+      childSeat: args.eventInput.childSeat,
+      music: args.eventInput.music,
+      seatBelts: args.eventInput.seatBelts,
+      sleepingBed: args.eventInput.sleepingBed,
+      water: args.eventInput.water,
+      bluetooth: args.eventInput.bluetooth,
+      onBoardComputer: args.eventInput.onBoardComputer,
+      audioInput: args.eventInput.audioInput,
+      carKit: args.eventInput.carKit,
+      remoteLocking: args.eventInput.remoteLocking,
+      climateControl: args.eventInput.climateControl,
       urlImage: args.eventInput.urlImage,
       description: args.eventInput.description,
+
       price: +args.eventInput.price,
-      date: new Date(args.eventInput.date),
+
       //pass the ObjectId  of  the creator(user)
       creator: req.userId,
     });
@@ -67,9 +85,20 @@ module.exports = {
     if (!req.isAuth) {
       throw new Error("Unathenticathed");
     }
+    
+
     try {
+      const user = await User.findOneAndUpdate(
+        { _id: mongoose.Types.ObjectId(req.userId) },
+        { $pull: { createdEvents: mongoose.Types.ObjectId(args.eventId) } },
+        { multi: false },
+        function (err, result) {
+          console.log(result);
+        }
+      );
       const event = await Event.findById(args.eventId);
       await Event.deleteOne({ _id: args.eventId });
+      await user.save();
       return event;
     } catch (err) {
       throw err;

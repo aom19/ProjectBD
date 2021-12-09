@@ -1,6 +1,7 @@
 import React from "react";
 import image1 from "../assets/bg_1.jpg";
 import image3 from "../assets/bg_6.jpeg";
+import Section from "../components/Section/Section";
 
 import { NavLink } from "react-router-dom";
 const About = () => {
@@ -8,11 +9,12 @@ const About = () => {
     <div
       style={{
         // backgroundColor: "blue",
-        width: "96%",
+        width: "100%",
         height: "86vh",
       }}
     >
-      <section
+      <Section image={image1} name={"About Us"} page={"About"} />
+      {/* <section
         class="hero-wrap hero-wrap-2 js-fullheight ftco-degree-bg"
         style={{
           backgroundImage: `url(${image1})`,
@@ -36,7 +38,7 @@ const About = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section class="ftco-section ftco-about " style={{ marginTop: "-40px" }}>
         <div class="container">

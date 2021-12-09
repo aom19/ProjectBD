@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import image1 from "../assets/bg_1.jpg";
 import image2 from "../assets/bg_5.jpeg";
@@ -8,11 +9,44 @@ import { FaRoute, FaRegHandshake, FaMoneyBill } from "react-icons/fa";
 
 import "./Home.css";
 
+//actions
+import { filterCars } from "../features/actions/booking";
+
 const Home = () => {
-  const [state, setState] = useState({ img: 0 });
+  const dispatch = useDispatch();
 
   //array of images
   const imgArray = [image1, image2, image3, image4];
+  const [state, setState] = useState({ img: 0 });
+
+  const [values, setValues] = useState({
+    pickUpLocation: "",
+    pickUpDate: "",
+    dropOffDate: "",
+    dropOffLocation: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(values);
+    dispatch(
+      filterCars(
+        values.pickUpLocation,
+        values.pickUpDate,
+        values.dropOffLocation,
+
+        values.dropOffDate
+      )
+    );
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -54,7 +88,7 @@ const Home = () => {
                 <p style={{ fontSize: "18px" }}>
                   A small river named Duden flows by their place and supplies it
                   with the necessary regelialia. It is a paradisematic country,
-                  in which roasted parts
+                  in which roasted part 
                 </p>
               </div>
             </div>
@@ -63,7 +97,7 @@ const Home = () => {
       </div>
       {/* ------- form section */}
 
-      <section className="ftco-section ftco-no-pt bg-light">
+      <section className="ftco-section ftco-no-pt ">
         <div className="container">
           <div className="row no-gutters">
             <div
@@ -75,7 +109,10 @@ const Home = () => {
                   className="col-md-4 d-flex align-items-center"
                   style={{ marginRight: "-58px" }}
                 >
-                  <form action="#" className="request-form  bg-primary">
+                  <form
+                    onSubmit={handleSubmit}
+                    className="request-form  bg-primary"
+                  >
                     <h2>Make your trip</h2>
                     <div className="form-group">
                       <label for="" className="label">
@@ -85,6 +122,9 @@ const Home = () => {
                         type="text"
                         className="form-control"
                         placeholder="City, Airport, Station, etc"
+                        name="pickUpLocation"
+                        value={values.pickUpLocation}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="form-group">
@@ -95,6 +135,9 @@ const Home = () => {
                         type="text"
                         className="form-control"
                         placeholder="City, Airport, Station, etc"
+                        name="dropOffLocation"
+                        value={values.dropOffLocation}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="d-flex">
@@ -103,10 +146,13 @@ const Home = () => {
                           Pick-up date
                         </label>
                         <input
-                          type="text"
+                          type="date"
                           className="form-control"
                           id="book_pick_date"
                           placeholder="Date"
+                          name="pickUpDate"
+                          value={values.pickUpDate}
+                          onChange={handleChange}
                         />
                       </div>
                       <div className="form-group ml-2">
@@ -114,14 +160,17 @@ const Home = () => {
                           Drop-off date
                         </label>
                         <input
-                          type="text"
+                          type="date"
                           className="form-control"
                           id="book_off_date"
                           placeholder="Date"
+                          name="dropOffDate"
+                          value={values.dropOffDate}
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                       <label for="" className="label">
                         Pick-up time
                       </label>
@@ -131,7 +180,7 @@ const Home = () => {
                         id="time_pick"
                         placeholder="Time"
                       />
-                    </div>
+                    </div> */}
                     <div className="form-group">
                       <input
                         type="submit"

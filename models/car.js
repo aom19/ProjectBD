@@ -9,7 +9,7 @@ const eventSchema = new Schema({
     required: true,
   },
   model: {
-    type: String,
+    type: Number,
     required: true,
   },
   description: {
@@ -97,15 +97,15 @@ const eventSchema = new Schema({
     type: String,
     required: true,
   },
-  
-  inchiriat: {
-    type: String,
-    required: false,
+  date: {
+    type: Date,
+    required: true,
   },
+
   creator: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },
 });
 
-module.exports = mongoose.model("Event", eventSchema);
+module.exports = mongoose.model("Car", carSchema);
