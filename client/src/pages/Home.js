@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 import image1 from "../assets/bg_1.jpg";
 import image2 from "../assets/bg_5.jpeg";
@@ -88,7 +89,7 @@ const Home = () => {
                 <p style={{ fontSize: "18px" }}>
                   A small river named Duden flows by their place and supplies it
                   with the necessary regelialia. It is a paradisematic country,
-                  in which roasted part 
+                  in which roasted part
                 </p>
               </div>
             </div>
@@ -101,13 +102,13 @@ const Home = () => {
         <div className="container">
           <div className="row no-gutters">
             <div
-              className="col-md-12	featured-top"
+              className="col-md-12 featured-top"
               style={{ marginTop: "-280px" }}
             >
               <div className="row no-gutters">
                 <div
-                  className="col-md-4 d-flex align-items-center"
-                  style={{ marginRight: "-58px" }}
+                  className="col-md-4  d-flex align-items-center"
+                  style={{ marginRight: "-45px" }}
                 >
                   <form
                     onSubmit={handleSubmit}
@@ -190,8 +191,8 @@ const Home = () => {
                     </div>
                   </form>
                 </div>
-                <div className="col-md-8 d-flex align-items-center">
-                  <div className="services-wrap rounded-right w-100">
+                <div className="col-md-8  d-flex align-items-center">
+                  <div className="services-wrap rounded-right w-94">
                     <h3 className="heading-section mb-4">
                       Better Way to Rent Your Perfect Cars
                     </h3>
@@ -240,9 +241,9 @@ const Home = () => {
                       </div>
                     </div>
                     <p>
-                      <a href="#" className="btn btn-primary py-3 px-4">
+                      <NavLink className="btn btn-primary py-3 px-4" to="/cars">
                         Reserve Your Perfect Car
-                      </a>
+                      </NavLink>
                     </p>
                   </div>
                 </div>
